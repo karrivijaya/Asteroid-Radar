@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="asteroidProperty"
+            type="com.udacity.asteroidradar.domain.Asteroid" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_asteroidName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/style_textview_main"
+            android:text="@{asteroidProperty.codename}"
+            android:contentDescription='@{"Code name of asteroid:"+asteroidProperty.codename}'
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2016 xx34" />
+
+        <TextView
+            android:id="@+id/tv_approachDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/style_textview_sub"
+            android:text="@{asteroidProperty.closeApproachDate}"
+            android:contentDescription='@{"Close approach date:"+asteroidProperty.closeApproachDate}'
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_asteroidName"
+            tools:text="2020-02-08" />
+
+        <ImageView
+            android:id="@+id/iv_status"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.695"
+            android:contentDescription='@{"Potentially hazardous:"+ asteroidProperty.potentiallyHazardous}'
+            app:statusIcon="@{asteroidProperty.potentiallyHazardous}"
+            tools:src="@drawable/ic_status_normal" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,7 +1,7 @@
 package com.udacity.asteroidradar.api
 
-import com.udacity.asteroidradar.Asteroid
-import com.udacity.asteroidradar.Constants
+import com.udacity.asteroidradar.domain.Asteroid
+import com.udacity.asteroidradar.util.Constants
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,29 +18,37 @@ fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
 
         for (i in 0 until dateAsteroidJsonArray.length()) {
             val asteroidJson = dateAsteroidJsonArray.getJSONObject(i)
-            val id = asteroidJson.getLong("id")
-            val codename = asteroidJson.getString("name")
-            val absoluteMagnitude = asteroidJson.getDouble("absolute_magnitude_h")
-            val estimatedDiameter = asteroidJson.getJSONObject("estimated_diameter")
-                .getJSONObject("kilometers").getDouble("estimated_diameter_max")
-
-            val closeApproachData = asteroidJson
-                .getJSONArray("close_approach_data").getJSONObject(0)
-            val relativeVelocity = closeApproachData.getJSONObject("relative_velocity")
-                .getDouble("kilometers_per_second")
-            val distanceFromEarth = closeApproachData.getJSONObject("miss_distance")
-                .getDouble("astronomical")
-            val isPotentiallyHazardous = asteroidJson
-                .getBoolean("is_potentially_hazardous_asteroid")
-
-            val asteroid = Asteroid(id, codename, formattedDate, absoluteMagnitude,
-                estimatedDiameter, relativeVelocity, distanceFromEarth, isPotentiallyHazardous)
+            val asteroid = convertFromJsonArrayToDomainEntity(asteroidJson, formattedDate)
             asteroidList.add(asteroid)
         }
     }
 
     return asteroidList
 }
+
+private fun convertFromJsonArrayToDomainEntity(asteroidJson:JSONObject, formattedDate:String): Asteroid{
+
+    val id = asteroidJson.getLong("id")
+    val codename = asteroidJson.getString("name")
+    val absoluteMagnitude = asteroidJson.getDouble("absolute_magnitude_h")
+    val estimatedDiameter = asteroidJson.getJSONObject("estimated_diameter")
+        .getJSONObject("kilometers").getDouble("estimated_diameter_max")
+
+    val closeApproachData = asteroidJson
+        .getJSONArray("close_approach_data").getJSONObject(0)
+    val relativeVelocity = closeApproachData.getJSONObject("relative_velocity")
+        .getDouble("kilometers_per_second")
+    val distanceFromEarth = closeApproachData.getJSONObject("miss_distance")
+        .getDouble("astronomical")
+    val isPotentiallyHazardous = asteroidJson
+        .getBoolean("is_potentially_hazardous_asteroid")
+
+    val asteroid = Asteroid(id, codename, formattedDate, absoluteMagnitude,
+        estimatedDiameter, relativeVelocity, distanceFromEarth, isPotentiallyHazardous)
+    return asteroid
+
+}
+
 
 private fun getNextSevenDaysFormattedDates(): ArrayList<String> {
     val formattedDateList = ArrayList<String>()
@@ -55,3 +63,5 @@ private fun getNextSevenDaysFormattedDates(): ArrayList<String> {
 
     return formattedDateList
 }
+
+

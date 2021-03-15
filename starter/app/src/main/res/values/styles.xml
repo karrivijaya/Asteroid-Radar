@@ -8,4 +8,20 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="style_textview_main" parent = "Widget.AppCompat.TextView">
+        <item name ="android:textColor">@color/default_text_color</item>
+        <item name="android:textSize">@dimen/name_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="style_textview_sub" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/text_grey</item>
+        <item name="android:textSize">@dimen/date_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
