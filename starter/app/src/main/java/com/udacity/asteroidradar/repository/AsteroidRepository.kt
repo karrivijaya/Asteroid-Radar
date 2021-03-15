@@ -2,6 +2,7 @@ package com.udacity.asteroidradar.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
+import com.udacity.asteroidradar.BuildConfig
 import com.udacity.asteroidradar.domain.PictureOfDay
 import com.udacity.asteroidradar.api.CreateRetrofit
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
@@ -30,7 +31,7 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
     suspend fun refreshData() {
         withContext(Dispatchers.IO) {
             val asteroidListFromNetwork =
-                CreateRetrofit.retrofitService.getAsteroids(Constants.API_KEY)    // fetching from the end point and storing in the databse
+                CreateRetrofit.retrofitService.getAsteroids(BuildConfig.AsteroidRadarAPIKey)    // fetching from the end point and storing in the databse
             val parsedResult = parseAsteroidsJsonResult(JSONObject(asteroidListFromNetwork))
             database.asteroidDao.insertAll(*parsedResult.asDatabaseModel())
 
@@ -49,7 +50,7 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
     suspend fun fetchPictureOfTheDay() {
         val picture: PictureOfDay
         withContext(Dispatchers.IO) {
-            picture = CreateRetrofit.retrofitService.getPictureOfTheDay(Constants.API_KEY) // fetching from the endpoing and storing in the database
+            picture = CreateRetrofit.retrofitService.getPictureOfTheDay(BuildConfig.AsteroidRadarAPIKey) // fetching from the endpoing and storing in the database
             database.asteroidDao.deletePictureDetails()
             val databaseModel = picture.asDatabaseModel()
             database.asteroidDao.insertPictureDetails(databaseModel)
