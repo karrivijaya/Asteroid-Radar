@@ -86,11 +86,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             _apiStatus.value = AsteroidApiStatus.LOADING
             // refreshing data
             try {
-                asteroidRepository.refreshData()  // encountering time out exception most times while fetching from end point.
-                                                    // So trying to reload data until no error encountered
+                asteroidRepository.refreshData()
                 _apiStatus.value = AsteroidApiStatus.DONE
             } catch (e: Exception) {
-                Timber.i("viewmodel error: $e.message.toString()")
+                Timber.i("viewmodel error: ${e.printStackTrace()}")
                 _apiStatus.value = AsteroidApiStatus.ERROR
             }
         }

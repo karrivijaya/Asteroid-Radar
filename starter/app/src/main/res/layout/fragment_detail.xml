@@ -27,8 +27,8 @@
             tools:srcCompat="@drawable/asteroid_safe" />
 
         <ScrollView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/dimen_zero_width"
+            android:layout_height="@dimen/dimen_zero_height"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

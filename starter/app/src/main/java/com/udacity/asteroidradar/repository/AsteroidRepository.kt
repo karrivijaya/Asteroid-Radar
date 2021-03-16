@@ -24,14 +24,21 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
     val currentDate = Calendar.getInstance().time
-
     val currentDateStr = dateFormat.format(currentDate)
+
+    val endDate = Calendar.getInstance()
+    val endDateStr = getEndDate()
+
+    fun getEndDate(): String  {
+        endDate.add(Calendar.DATE, Constants.DEFAULT_END_DATE_DAYS)
+        return dateFormat.format(endDate.time)
+    }
 
     // fetching data from network and mapping network model to database model
     suspend fun refreshData() {
         withContext(Dispatchers.IO) {
             val asteroidListFromNetwork =
-                CreateRetrofit.retrofitService.getAsteroids(BuildConfig.AsteroidRadarAPIKey)    // fetching from the end point and storing in the databse
+                CreateRetrofit.retrofitService.getAsteroids(currentDateStr,endDateStr,BuildConfig.AsteroidRadarAPIKey)    // fetching from the end point and storing in the databse
             val parsedResult = parseAsteroidsJsonResult(JSONObject(asteroidListFromNetwork))
             database.asteroidDao.insertAll(*parsedResult.asDatabaseModel())
 

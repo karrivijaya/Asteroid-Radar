@@ -22,7 +22,7 @@
         <FrameLayout
             android:id="@+id/activity_main_image_of_the_day_layout"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="@dimen/image_height"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:textColor="@android:color/white"
+                android:textColor="@color/default_text_color"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:layout_gravity="bottom"
@@ -52,8 +52,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/asteroid_recycler"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/dimen_zero_width"
+            android:layout_height="@dimen/dimen_zero_height"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,8 +65,8 @@
             />
         <ImageView
             android:id="@+id/status_loading_wheel"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/dimen_loading_wheel"
+            android:layout_height="@dimen/dimen_loading_wheel"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/asteroid_recycler"
             app:layout_constraintLeft_toLeftOf="parent"
