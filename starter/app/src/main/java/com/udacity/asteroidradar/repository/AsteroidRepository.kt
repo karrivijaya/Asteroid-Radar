@@ -1,4 +1,4 @@
-package com.udacity.asteroidradar.repository
+ package com.udacity.asteroidradar.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
@@ -7,7 +7,6 @@ import com.udacity.asteroidradar.domain.PictureOfDay
 import com.udacity.asteroidradar.api.CreateRetrofit
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
 import com.udacity.asteroidradar.database.AsteroidDatabase
-import com.udacity.asteroidradar.database.PictureDatabaseModel
 import com.udacity.asteroidradar.database.asDomainModel
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.util.Constants

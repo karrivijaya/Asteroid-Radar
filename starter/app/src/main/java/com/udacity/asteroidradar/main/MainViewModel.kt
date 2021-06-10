@@ -34,8 +34,6 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     private val _navigateToSelectedAsteroid = MutableLiveData<Asteroid?>()
 
-    var dataUpdated: Boolean = false
-
     val navigateToSelectedAsteroid: LiveData<Asteroid?>
         get() = _navigateToSelectedAsteroid
 
@@ -138,10 +136,6 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         super.onCleared()
         asteroidListLiveData.removeObserver(asteroidListObserver)
         updatePictureLiveData.removeObserver(updatePictureObserver)
-    }
-
-    fun setUpdateData() {
-        dataUpdated = true
     }
 
 

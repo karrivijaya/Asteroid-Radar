@@ -67,31 +67,6 @@ fun bindLoadingImage(imageView: ImageView, status: AsteroidApiStatus){
     }
 }
 
-@BindingAdapter("refreshAction","dataUpdated")
-fun bindErrorButton(button: Button, status:AsteroidApiStatus, dataUpdated: Boolean){
-    when(status)
-    {
-        AsteroidApiStatus.LOADING -> {
-            button.visibility = View.GONE
-        }
-
-        AsteroidApiStatus.DONE -> {
-            button.visibility = View.GONE
-        }
-
-        AsteroidApiStatus.ERROR -> {
-            if(!dataUpdated) {
-                button.visibility = View.VISIBLE   // showing refresh button only if error encountered AND if the data in the recycler view is empty
-                                                    // which means there is also no data in the database. That is to say, this button will be visible if
-                                                    // there is problem loading data when the app starts for the first time.
-            }
-        }
-
-    }
-}
-
-
-
 @BindingAdapter("loadPictureOfTheDayUrl","imageType")
 fun bindMainImage(imageView: ImageView, loadPictureOfTheDayUrl: String?, imageType: String?) {
     if (imageType.equals("image")) {

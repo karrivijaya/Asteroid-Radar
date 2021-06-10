@@ -14,7 +14,7 @@ interface AsteroidDao {
     @Query("SELECT * FROM asteroid_detail_table WHERE closeApproachDate >= :today ORDER BY closeApproachDate ASC")
     fun getSavedAsteroids(today: String): LiveData<List<AsteroidDatabaseModel>?> // not showing past records in the database
 
-    @Query("DELETE FROM asteroid_detail_table WHERE closeApproachDate<= :today")
+    @Query("DELETE FROM asteroid_detail_table WHERE closeApproachDate <= :today")
     fun deletePastAsteroids(today: String)
 
     @Query("SELECT * FROM asteroid_detail_table WHERE closeApproachDate = :today ORDER BY closeApproachDate ASC")

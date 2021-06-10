@@ -15,6 +15,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 import java.lang.reflect.Type
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)
@@ -38,6 +40,9 @@ object CreateRetrofit {
 
 fun createHttpClient(): OkHttpClient{
     val builder = OkHttpClient.Builder()
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(30, TimeUnit.SECONDS)
     if(BuildConfig.DEBUG){
         builder.addInterceptor(OkHttpProfilerInterceptor())
     }
@@ -72,9 +77,9 @@ interface AsteroidRetrofitService {
     @Scalars
     @GET("neo/rest/v1/feed")
     suspend fun getAsteroids(
-        @Query("start_date") startDate: String,
-        @Query("end_date") endDate:String,
-        @Query("api_key") apiKey: String
+            @Query("start_date") startDate: String,
+            @Query("end_date") endDate: String,
+            @Query("api_key") apiKey: String
     ): String
 
     @Moshis

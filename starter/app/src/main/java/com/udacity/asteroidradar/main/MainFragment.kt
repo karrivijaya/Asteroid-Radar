@@ -23,7 +23,7 @@ class MainFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         val binding = FragmentMainBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
@@ -40,9 +40,6 @@ class MainFragment : Fragment() {
         viewModel.updateRecycleViewList.observe(viewLifecycleOwner, Observer<List<Asteroid>> { asteroids ->
             asteroids?.apply {
                 mainFragmentAdapter.submitList(asteroids)
-                if(this.isNotEmpty()){
-                    viewModel.setUpdateData()
-                }
             }
         })
 
@@ -57,9 +54,6 @@ class MainFragment : Fragment() {
             binding.picture = it
         })
 
-        binding.refreshButton.setOnClickListener {
-            viewModel.refreshData()
-        }
 
         return binding.root
     }
